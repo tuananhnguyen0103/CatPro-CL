@@ -1,0 +1,45 @@
+# ═══════════════════════════════════════════════════════════════════
+# CatPro-CL Config — Amazon CellPhones cold_20 | A11
+# A11 = SR-GNN + CategoryPrototype(EMA) + InfoNCE + Prototype Simulation Masking
+# lambda_proto=0.5, mask_prob=0.05
+# ═══════════════════════════════════════════════════════════════════
+
+data:
+  dataset: cellphones
+  data_dir: ~/data/amazon_cellphones_unified/cold_20
+  cold_ratio: 20
+  expected_cold: -1          # auto-detect từ meta.json
+
+model:
+  hidden_size: 128
+  n_gnn_steps: 1
+
+ablation: A11
+
+train:
+  epochs: 30
+  batch_size: 100
+  lr: 0.001
+  weight_decay: 1.0e-5
+  grad_clip: 5.0
+  patience: 5
+
+catprocl:
+  ema_momentum: 0.99
+  lambda_proto: 0.5          # best từ grid search A11
+  temperature: 0.1
+  perturbation_std: 0.05
+  mask_prob: 0.05             # Prototype Simulation Masking probability
+
+eval:
+  ks: [10, 20]
+  eval_every: 1
+
+seed: 42
+output_dir: ~/results_a11/cellphones
+checkpoint_dir: ~/checkpoints_a11/cellphones
+log_dir: ~/logs_a11/cellphones
+
+device: cuda
+num_workers: 6
+use_amp: false

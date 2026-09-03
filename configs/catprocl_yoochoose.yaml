@@ -1,0 +1,50 @@
+# ═══════════════════════════════════════════════════════════════════
+# CatPro-CL Config — Yoochoose 1/64 cold_20
+# ═══════════════════════════════════════════════════════════════════
+
+# ── Dataset ─────────────────────────────────────────────────────────
+data:
+  dataset: yoochoose_1_64
+  data_dir: ~/data/yoochoose_unified/cold_20
+  cold_ratio: 20
+  expected_cold: -1             # cập nhật sau khi chạy preprocessing
+
+# ── Model ────────────────────────────────────────────────────────────
+model:
+  hidden_size: 128
+  n_gnn_steps: 1
+
+# ── Ablation ─────────────────────────────────────────────────────────
+ablation: A11
+
+# ── Training ─────────────────────────────────────────────────────────
+train:
+  epochs: 30
+  batch_size: 100
+  lr: 0.001
+  weight_decay: 1.0e-5
+  grad_clip: 5.0
+  patience: 5
+
+# ── CatPro-CL Hyperparameters ────────────────────────────────────────
+catprocl:
+  ema_momentum: 0.99
+  lambda_proto: 0.5          # confirmed from grid search
+  temperature: 0.1
+  perturbation_std: 0.05
+  mask_prob: 0.05            # A11: confirmed from grid search
+
+# ── Evaluation ───────────────────────────────────────────────────────
+eval:
+  ks: [10, 20]
+  eval_every: 1
+
+# ── Seeds và output ──────────────────────────────────────────────────
+seed: 42
+output_dir: ~/results/yoochoose_unified
+checkpoint_dir: ~/checkpoints/yoochoose_unified
+log_dir: ~/logs/yoochoose_unified
+
+# ── System ───────────────────────────────────────────────────────────
+device: cuda
+num_workers: 8

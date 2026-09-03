@@ -1,0 +1,19 @@
+# CatPro-CL dependencies
+# Install: pip install -r requirements.txt
+
+# Core ML
+torch>=2.0.0          # cài theo hướng dẫn pytorch.org cho CUDA version của bạn
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Data
+pandas>=2.0.0
+
+# Config
+pyyaml>=6.0
+
+# Progress bar (không ảnh hưởng tốc độ train)
+tqdm>=4.65.0
+
+# Evaluation / Stats
+scikit-learn>=1.3.0   # Wilcoxon test

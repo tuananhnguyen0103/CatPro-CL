@@ -1,0 +1,47 @@
+# ═══════════════════════════════════════════════════════════════════
+# CatPro-CL Config — Diginetica cold_20, full session len | A11
+# A11 = A7 + Prototype Simulation Masking
+#   Trong training, với xác suất mask_prob, thay target embedding
+#   bằng prototype category → model học score items qua prototype
+#   → không còn train-test gap khi cold inference
+# ═══════════════════════════════════════════════════════════════════
+
+data:
+  dataset: diginetica
+  data_dir: ~/data/diginetica_unified/cold_20
+  cold_ratio: 20
+  expected_cold: -1
+
+model:
+  hidden_size: 128
+  n_gnn_steps: 1
+
+ablation: A11
+
+train:
+  epochs: 30
+  batch_size: 100
+  lr: 0.001
+  weight_decay: 1.0e-5
+  grad_clip: 5.0
+  patience: 5
+
+catprocl:
+  ema_momentum: 0.99
+  lambda_proto: 0.5          # confirmed from grid search
+  temperature: 0.1
+  perturbation_std: 0.05
+  mask_prob: 0.05            # A11: prob thay target emb bằng prototype (confirmed from grid search)
+
+eval:
+  ks: [10, 20]
+  eval_every: 1
+
+seed: 42
+output_dir: ~/results_dig_a11/diginetica
+checkpoint_dir: ~/checkpoints_dig_a11/diginetica
+log_dir: ~/logs_dig_a11/diginetica
+
+device: cuda
+num_workers: 6
+use_amp: false

@@ -1,0 +1,42 @@
+# ═══════════════════════════════════════════════════════════════════
+# CatPro-CL Config — Yoochoose 1/64 cold_20, filter session len [2, 4]
+# n_items=4,161 | n_cats=16 | n_train=60,071 | n_cold=831
+# ═══════════════════════════════════════════════════════════════════
+
+data:
+  dataset: yoochoose_maxlen4
+  data_dir: ~/data/yoochoose_maxlen4/cold_20
+  cold_ratio: 20
+  expected_cold: 831
+
+model:
+  hidden_size: 128
+  n_gnn_steps: 1
+
+ablation: A11
+
+train:
+  epochs: 30
+  batch_size: 100
+  lr: 0.001
+  weight_decay: 1.0e-5
+  grad_clip: 5.0
+  patience: 5
+
+catprocl:
+  ema_momentum: 0.99
+  lambda_proto: 0.1
+  temperature: 0.1
+  perturbation_std: 0.05
+
+eval:
+  ks: [10, 20]
+  eval_every: 1
+
+seed: 42
+output_dir: ~/results/yoochoose_maxlen4
+checkpoint_dir: ~/checkpoints/yoochoose_maxlen4
+log_dir: ~/logs/yoochoose_maxlen4
+
+device: cuda
+num_workers: 8

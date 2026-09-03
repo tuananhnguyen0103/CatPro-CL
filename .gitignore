@@ -1,0 +1,51 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environments ──────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+.env/
+
+# ── Experiment outputs (not committed — reproduce with provided scripts) ──────
+results/
+results_ablation/
+checkpoints/
+logs/
+*.log
+
+# ── Dataset & graph cache (large files — download separately per README) ──────
+data/
+*.pkl
+*.pkl.gz
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── OS / editor ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# ── Generated figures (recreate with scripts/plot_*.py) ───────────────────────
+*.png
+*.pdf
+*.svg
+
+# ── Temp / scratch ────────────────────────────────────────────────────────────
+*.tmp
+*.bak
+~$*
